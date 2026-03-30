@@ -347,7 +347,7 @@ Triển khai ứng dụng Android theo Clean Architecture (Presentation → Doma
   - Inject `ImageCompressor`, `CloudSyncManager`, `WorkManager` vào đúng scope
   - _Requirements: 3 (Tech Stack)_
 
-- [ ] 15. Navigation và App wiring
+- [x] 15. Navigation và App wiring
   - Tạo `BottomNavTab` enum với 3 tab: `GALLERY`, `ANALYTICS`, `SETTINGS`
   - Tạo `NavGraph` với Compose Navigation và `BottomNavigationBar`: `GalleryScreen`, `AnalyticsScreen`, `SettingsScreen` là top-level destinations; `AmountEntryScreen` và `WalletManagementScreen` là nested routes
   - `CameraFab` chỉ hiển thị khi `currentRoute == Gallery` (ẩn hoàn toàn ở Analytics và Settings)
