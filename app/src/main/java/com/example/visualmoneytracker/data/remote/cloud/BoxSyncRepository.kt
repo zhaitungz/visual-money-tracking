@@ -1,13 +1,10 @@
 package com.example.visualmoneytracker.data.remote.cloud
 
 import android.content.Context
-import com.example.visualmoneytracker.data.local.db.AppDatabase
-import com.example.visualmoneytracker.data.local.db.toDomain
 import com.example.visualmoneytracker.domain.model.CloudProvider
 import com.example.visualmoneytracker.domain.repository.SyncRepository
 import com.example.visualmoneytracker.domain.repository.TransactionRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
@@ -18,6 +15,7 @@ import java.util.Date
 import java.util.Locale
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -42,7 +40,7 @@ data class SyncTransactionItem(
 class BoxSyncRepository @Inject constructor(
     private val boxSyncManager: BoxSyncManager,
     private val transactionRepository: TransactionRepository,
-    private val context: Context
+    @ApplicationContext private val context: Context
 ) : SyncRepository {
 
     override suspend fun authenticate(provider: CloudProvider): Result<Unit> {
