@@ -216,8 +216,8 @@ Triển khai ứng dụng Android theo Clean Architecture (Presentation → Doma
     - Dùng `Arb.bind(...)` để generate `AutoSyncSettings` với `provider = null`, chạy `AutoSyncWorker.doWork()` với mock `CloudSyncManager`, verify không có network call nào được thực hiện và worker trả về `Result.success()`
     - Tag: `// Feature: visual-money-tracker, Property 9: Auto-sync does not run without valid OAuth`
 
-- [ ] 8. Xây dựng Presentation Layer – GalleryScreen
-  - [ ] 8.1 Implement GalleryViewModel
+- [x] 8. Xây dựng Presentation Layer – GalleryScreen
+  - [x] 8.1 Implement GalleryViewModel
     - Tạo `GalleryUiState` data class với `wallets`, `selectedWalletId`, `totalBalance`
     - Implement `GalleryViewModel` với `StateFlow<GalleryUiState>`
     - Gọi `GetTransactionsByMonthUseCase` (có wallet filter), group kết quả theo `YearMonth`
@@ -225,13 +225,13 @@ Triển khai ứng dụng Android theo Clean Architecture (Presentation → Doma
     - Expose actions: `onMonthSelected`, `onDeleteTransaction`, `onWalletFilterSelected`
     - _Requirements: 2.3.1, 2.3.2, 2.8.7_
 
-  - [ ] 8.2 Viết property test cho Monthly grouping correctness
+  - [x] 8.2 Viết property test cho Monthly grouping correctness
     - **Property 3: Monthly grouping correctness**
     - **Validates: Requirements 2.3.2**
     - Dùng `Arb.list(arbTransaction)` với `Arb.localDateTime()` ngẫu nhiên, apply grouping function, verify mọi transaction trong group có cùng year-month với group key
     - Tag: `// Feature: visual-money-tracker, Property 3: Monthly grouping correctness`
 
-  - [ ] 8.3 Implement GalleryScreen Composables
+  - [x] 8.3 Implement GalleryScreen Composables
     - Tạo `GalleryScreen` với `LazyVerticalGrid`
     - Tạo `MonthHeader` hiển thị tên tháng + tổng thu/tổng chi
     - Tạo `WalletBalanceHeader` hiển thị tổng số dư (tất cả ví hoặc ví đang filter) + `WalletFilterChips`
@@ -240,14 +240,14 @@ Triển khai ứng dụng Android theo Clean Architecture (Presentation → Doma
     - Tạo `CameraFab` cố định góc phải dưới
     - _Requirements: 2.3.1, 2.3.2, 2.3.3, 2.3.4, 2.8.7_
 
-  - [ ] 8.4 Viết UI tests cho GalleryScreen
+  - [x] 8.4 Viết UI tests cho GalleryScreen
     - Test: render với mock data → FAB hiển thị (2.2.1)
     - Test: `TransactionCard` overlay màu đỏ cho Expense, xanh cho Income
     - Test: `MonthHeader` hiển thị đúng tổng thu/chi
     - _Requirements: 2.2.1, 2.3.3, 2.3.4_
 
-- [ ] 9. Xây dựng Presentation Layer – Input Flow
-  - [ ] 9.1 Implement InputViewModel và AmountEntryScreen
+- [x] 9. Xây dựng Presentation Layer – Input Flow
+  - [x] 9.1 Implement InputViewModel và AmountEntryScreen
     - Tạo `AmountEntryUiState` data class với field `selectedCategoryId`, `availableCategories`, `selectedWalletId`, `availableWallets`
     - Implement `InputViewModel`: xử lý numpad input, toggle Income/Expense, load categories từ `GetCategoriesUseCase`, load wallets từ `GetWalletsUseCase` (auto-select nếu chỉ có 1 ví), gọi `SaveTransactionUseCase` với `categoryId` và `walletId`
     - Tạo `AmountEntryScreen` Composable: preview ảnh, numpad, toggle Thu/Chi, category picker (bắt buộc, default "Khác"), wallet picker (bắt buộc, auto-select nếu 1 ví), nút Lưu
@@ -255,7 +255,7 @@ Triển khai ứng dụng Android theo Clean Architecture (Presentation → Doma
     - Nếu chưa có ví nào, hiển thị prompt yêu cầu tạo ví trước
     - _Requirements: 2.2.3, 2.6.4, 2.8.4, 2.8.6_
 
-  - [ ] 9.2 Implement BottomSheet và Camera/Gallery integration
+  - [x] 9.2 Implement BottomSheet và Camera/Gallery integration
     - Tạo `InputBottomSheet` với 2 options: "Chụp ảnh mới" và "Chọn từ thư viện"
     - Tích hợp CameraX cho chụp ảnh trực tiếp
     - Tích hợp Android Photo Picker (`ActivityResultContracts.PickVisualMedia`)
@@ -263,7 +263,7 @@ Triển khai ứng dụng Android theo Clean Architecture (Presentation → Doma
     - CameraX failure → fallback về Photo Picker
     - _Requirements: 2.2.1, 2.2.2, 2.2.3_
 
-  - [ ] 9.3 Viết unit tests cho InputViewModel
+  - [x] 9.3 Viết unit tests cho InputViewModel
     - Test: amount rỗng → Save button disabled
     - Test: amount = 0 → Save button disabled
     - Test: không có ví → Save button disabled, hiển thị prompt tạo ví
@@ -273,47 +273,47 @@ Triển khai ứng dụng Android theo Clean Architecture (Presentation → Doma
     - Test: chỉ có 1 ví → tự động chọn ví đó
     - _Requirements: 2.2.3, 2.6.4, 2.8.4, 2.8.6_
 
-- [ ] 10. Xây dựng Presentation Layer – Category Management
-  - [ ] 10.1 Implement CategoryViewModel và CategoryManagementScreen
+- [x] 10. Xây dựng Presentation Layer – Category Management
+  - [x] 10.1 Implement CategoryViewModel và CategoryManagementScreen
     - Tạo `CategoryViewModel` với `StateFlow<List<Category>>`; load từ `GetCategoriesUseCase`
     - Expose actions: `onAddCategory(name)`, `onRenameCategory(id, newName)`, `onDeleteCategory(id)`
     - Tạo `CategoryManagementScreen` Composable: danh sách categories, phân biệt preset (không có nút xóa/sửa) và custom (có nút sửa + xóa)
     - Thêm dialog xác nhận khi xóa category đang được dùng (thông báo cascade sang "Khác")
     - _Requirements: 2.6.2, 2.6.3_
 
-  - [ ] 10.2 Viết unit tests cho CategoryViewModel
+  - [x] 10.2 Viết unit tests cho CategoryViewModel
     - Test: xóa preset category → không gọi `DeleteCategoryUseCase`
     - Test: xóa custom category → gọi `DeleteCategoryUseCase` với đúng ID
     - Test: thêm category mới → gọi `SaveCategoryUseCase`
     - _Requirements: 2.6.2, 2.6.3_
 
-- [ ] 11. Xây dựng Presentation Layer – Analytics Screen
-  - [ ] 11.1 Implement AnalyticsViewModel
+- [x] 11. Xây dựng Presentation Layer – Analytics Screen
+  - [x] 11.1 Implement AnalyticsViewModel
     - Tạo `AnalyticsUiState` data class với `selectedMonth`, `totalIncome`, `totalExpense`, `viewMode`, `breakdowns`, `wallets`, `selectedWalletId`
     - Implement `AnalyticsViewModel`: gọi `GetAnalyticsUseCase` khi tháng, viewMode hoặc walletId thay đổi; gọi `GetWalletsUseCase` để load danh sách ví
     - Expose actions: `onMonthSelected`, `onToggleViewMode`, `onWalletFilterSelected`
     - _Requirements: 2.7.1, 2.7.2, 2.7.3, 2.7.6_
 
-  - [ ] 11.2 Viết property test cho Pie chart percentages sum to 100%
+  - [x] 11.2 Viết property test cho Pie chart percentages sum to 100%
     - **Property 11: Pie chart percentages sum to 100%**
     - **Validates: Requirements 2.7.4**
     - Dùng `Arb.list(arbTransaction, 1..100)` với random `categoryId`, gọi `GetAnalyticsUseCase`, verify `breakdowns.sumOf { it.percentage } ≈ 100f` (±0.1%)
     - Tag: `// Feature: visual-money-tracker, Property 11: Pie chart percentages sum to 100%`
 
-  - [ ] 11.3 Implement AnalyticsScreen Composables
+  - [x] 11.3 Implement AnalyticsScreen Composables
     - Tạo `AnalyticsScreen` với `MonthSwitcher`, `MonthlySummaryHeader`, `ExpenseIncomeToggle`, `WalletFilterChips`, `CategoryPieChart`, `CategoryBreakdownList`
     - `CategoryPieChart`: mỗi slice hiển thị tên category, %, số tiền tuyệt đối
     - `CategoryBreakdownList`: danh sách bên dưới chart, màu nhất quán với chart slices
     - `WalletFilterChips`: chip "Tất cả" + chip cho từng ví, filter analytics theo ví được chọn
     - _Requirements: 2.7.1, 2.7.2, 2.7.3, 2.7.4, 2.7.5, 2.7.6_
 
-  - [ ] 11.4 Viết UI tests cho AnalyticsScreen
+  - [x] 11.4 Viết UI tests cho AnalyticsScreen
     - Test: toggle Expense/Income → breakdowns thay đổi tương ứng
     - Test: tháng không có giao dịch → hiển thị tổng = 0, chart trống
     - _Requirements: 2.7.2, 2.7.3_
 
-- [ ] 12. Xây dựng SettingsScreen
-  - [ ] 12.1 Implement SettingsViewModel và SettingsScreen
+- [x] 12. Xây dựng SettingsScreen
+  - [x] 12.1 Implement SettingsViewModel và SettingsScreen
     - Tạo `SettingsViewModel` với state cho reminder settings, cloud provider và auto-sync settings
     - Tạo `SettingsScreen` Composable: toggle reminder on/off, chọn frequency, time picker, chọn cloud provider
     - Thêm section Auto-sync: toggle bật/tắt, chọn `AutoSyncFrequency` (DAILY / WIFI_ONLY), chọn giờ chạy
@@ -325,7 +325,7 @@ Triển khai ứng dụng Android theo Clean Architecture (Presentation → Doma
     - _Requirements: 2.4.2, 2.4.3, 2.4.5, 2.4.6, 2.6.2, 2.8.7_
 
 - [ ] 13. Xây dựng Wallet Management
-  - [ ] 13.1 Implement WalletViewModel và WalletManagementScreen
+  - [x] 13.1 Implement WalletViewModel và WalletManagementScreen
     - Tạo `WalletUiState` data class với `wallets: List<WalletWithBalance>`
     - Implement `WalletViewModel`: load wallets từ `GetWalletsUseCase`, tính balance từ `GetWalletBalanceUseCase` cho từng ví
     - Expose actions: `onAddWallet(name, openingBalance)`, `onUpdateWallet(id, name, openingBalance)`, `onDeleteWallet(id, reassignToWalletId)`
@@ -334,14 +334,14 @@ Triển khai ứng dụng Android theo Clean Architecture (Presentation → Doma
     - Tạo `DeleteWalletDialog`: hỏi chuyển giao dịch sang ví khác (dropdown chọn ví) hay xóa luôn
     - _Requirements: 2.8.1, 2.8.3, 2.8.5, 2.8.7_
 
-  - [ ] 13.2 Viết unit tests cho WalletViewModel
+  - [x] 13.2 Viết unit tests cho WalletViewModel
     - Test: thêm ví mới → gọi `SaveWalletUseCase` với đúng tên và opening balance
     - Test: xóa ví với reassign → gọi `DeleteWalletUseCase` với `reassignToWalletId` hợp lệ
     - Test: xóa ví với cascade delete → gọi `DeleteWalletUseCase` với `reassignToWalletId = null`
     - Test: số dư hiển thị đúng = openingBalance + sum(INCOME) - sum(EXPENSE)
     - _Requirements: 2.8.1, 2.8.3, 2.8.5_
 
-- [ ] 14. Dependency Injection với Hilt
+- [x] 14. Dependency Injection với Hilt
   - Tạo Hilt modules trong `di/`: `DatabaseModule`, `RepositoryModule`, `UseCaseModule`, `WorkerModule`
   - Bind tất cả interfaces với implementations, bao gồm `CategoryRepository` và `WalletRepository`
   - Inject `ImageCompressor`, `CloudSyncManager`, `WorkManager` vào đúng scope
