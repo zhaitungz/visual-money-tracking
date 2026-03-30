@@ -97,7 +97,7 @@ class BoxSyncRepository @Inject constructor(
                 val uploadResult = boxSyncManager.uploadFile(zipFile, zipFile.name)
                 zipFile.delete()
 
-                if (uploadResult.isFailure) return@withContext uploadResult
+                if (uploadResult.isFailure) return@withContext Result.failure(uploadResult.exceptionOrNull() ?: Exception("Upload failed"))
 
                 // Apply retention policy: keep last 5 backups
                 applyRetentionPolicy(keepCount = 5)
