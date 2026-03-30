@@ -20,10 +20,10 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowDownward
 import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.ArrowUpward
-import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.FloatingActionButton
@@ -235,7 +235,7 @@ fun AmountOverlay(amount: Double, type: TransactionType, modifier: Modifier = Mo
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            imageVector = if (isIncome) Icons.Default.ArrowUpward else Icons.Default.ArrowDownward,
+            imageVector = if (isIncome) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
             contentDescription = null,
             tint = color,
             modifier = Modifier.size(10.dp)
@@ -258,7 +258,7 @@ fun CameraFab(onClick: () -> Unit, modifier: Modifier = Modifier) {
         shape = CircleShape,
         containerColor = MaterialTheme.colorScheme.primary
     ) {
-        Icon(Icons.Default.CameraAlt, contentDescription = "Thêm giao dịch")
+        Icon(Icons.Default.Add, contentDescription = "Thêm giao dịch")
     }
 }
 

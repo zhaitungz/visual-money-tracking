@@ -17,7 +17,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Backspace
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenuItem
@@ -234,7 +234,7 @@ fun Numpad(onDigit: (String) -> Unit, onDelete: () -> Unit) {
                                 .aspectRatio(2f)
                         ) {
                             Icon(
-                                Icons.Default.Backspace,
+                                Icons.Default.Clear,
                                 contentDescription = "Xóa",
                                 modifier = Modifier.size(20.dp)
                             )

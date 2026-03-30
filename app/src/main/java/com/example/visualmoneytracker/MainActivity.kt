@@ -7,8 +7,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.BarChart
-import androidx.compose.material.icons.filled.GridView
+import androidx.compose.material.icons.filled.Analytics
+import androidx.compose.material.icons.filled.Apps
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -58,8 +58,8 @@ fun MainScreen() {
     val walletState by walletViewModel.uiState.collectAsState()
 
     val bottomNavItems = listOf(
-        Triple(Screen.Gallery.route, Icons.Default.GridView, "Gallery"),
-        Triple(Screen.Analytics.route, Icons.Default.BarChart, "Analytics"),
+        Triple(Screen.Gallery.route, Icons.Default.Apps, "Gallery"),
+        Triple(Screen.Analytics.route, Icons.Default.Analytics, "Analytics"),
         Triple(Screen.Settings.route, Icons.Default.Settings, "Cài đặt")
     )
 

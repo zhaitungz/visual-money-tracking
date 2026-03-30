@@ -8,8 +8,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CameraAlt
-import androidx.compose.material.icons.filled.PhotoLibrary
+import androidx.compose.material.icons.filled.AddAPhoto
+import androidx.compose.material.icons.filled.Image
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
@@ -63,7 +63,7 @@ fun InputBottomSheet(
         ) {
             ListItem(
                 headlineContent = { Text("Chụp ảnh mới") },
-                leadingContent = { Icon(Icons.Default.CameraAlt, contentDescription = null) },
+                leadingContent = { Icon(Icons.Default.AddAPhoto, contentDescription = null) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable {
@@ -79,7 +79,7 @@ fun InputBottomSheet(
             )
             ListItem(
                 headlineContent = { Text("Chọn từ thư viện") },
-                leadingContent = { Icon(Icons.Default.PhotoLibrary, contentDescription = null) },
+                leadingContent = { Icon(Icons.Default.Image, contentDescription = null) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable {
