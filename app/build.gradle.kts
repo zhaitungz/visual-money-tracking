@@ -1,3 +1,10 @@
+import java.util.Properties
+
+val localProperties = Properties().apply {
+    val f = rootProject.file("local.properties")
+    if (f.exists()) load(f.inputStream())
+}
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -19,6 +26,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BOX_CLIENT_ID", "\"${localProperties["box.client.id"] ?: ""}\"")
+        buildConfigField("String", "BOX_CLIENT_SECRET", "\"${localProperties["box.client.secret"] ?: ""}\"")
+        buildConfigField("String", "BOX_REDIRECT_URI", "\"com.example.visualmoneytracker://oauth2callback\"")
     }
 
     buildTypes {
@@ -42,6 +52,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     testOptions {
@@ -60,6 +71,9 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    // OkHttp for Box API
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
     // Material Icons Extended
     implementation("androidx.compose.material:material-icons-extended")
     implementation(libs.androidx.navigation.compose)

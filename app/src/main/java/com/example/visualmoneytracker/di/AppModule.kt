@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.work.WorkManager
 import com.example.visualmoneytracker.data.local.file.ImageCompressor
 import com.example.visualmoneytracker.data.local.file.ImageCompressorImpl
+import com.example.visualmoneytracker.data.remote.cloud.BoxSyncManager
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -25,5 +26,10 @@ abstract class AppModule {
         @Singleton
         fun provideWorkManager(@ApplicationContext context: Context): WorkManager =
             WorkManager.getInstance(context)
+
+        @Provides
+        @Singleton
+        fun provideBoxSyncManager(@ApplicationContext context: Context): BoxSyncManager =
+            BoxSyncManager(context)
     }
 }

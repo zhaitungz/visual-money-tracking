@@ -1,5 +1,6 @@
 package com.example.visualmoneytracker
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -29,6 +30,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.visualmoneytracker.presentation.input.InputBottomSheet
 import com.example.visualmoneytracker.presentation.navigation.NavGraph
 import com.example.visualmoneytracker.presentation.navigation.Screen
+import com.example.visualmoneytracker.presentation.settings.SyncViewModel
 import com.example.visualmoneytracker.presentation.settings.wallet.WalletViewModel
 import com.example.visualmoneytracker.ui.theme.VisualMoneyTrackerTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,6 +46,20 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        // Handle Box OAuth callback
+        intent.data?.let { uri ->
+            if (uri.scheme == "com.example.visualmoneytracker" && uri.host == "oauth2callback") {
+                val code = uri.getQueryParameter("code")
+                if (code != null) {
+                    // Pass code to SyncViewModel via a shared mechanism
+                    OAuthCallbackHolder.pendingCode = code
+                }
+            }
+        }
+    }
 }
 
 @Composable
@@ -56,6 +72,15 @@ fun MainScreen() {
 
     val walletViewModel: WalletViewModel = hiltViewModel()
     val walletState by walletViewModel.uiState.collectAsState()
+
+    val syncViewModel: SyncViewModel = hiltViewModel()
+
+    // Handle OAuth callback
+    val pendingCode = OAuthCallbackHolder.pendingCode
+    if (pendingCode != null) {
+        OAuthCallbackHolder.pendingCode = null
+        syncViewModel.handleAuthCode(pendingCode)
+    }
 
     val bottomNavItems = listOf(
         Triple(Screen.Gallery.route, Icons.Default.Apps, "Gallery"),
@@ -108,4 +133,8 @@ fun MainScreen() {
             }
         )
     }
+}
+
+object OAuthCallbackHolder {
+    var pendingCode: String? = null
 }
