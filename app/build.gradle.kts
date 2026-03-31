@@ -26,8 +26,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "BOX_CLIENT_ID", "\"${localProperties["box.client.id"] ?: ""}\"")
-        buildConfigField("String", "BOX_CLIENT_SECRET", "\"${localProperties["box.client.secret"] ?: ""}\"")
+        buildConfigField("String", "BOX_CLIENT_ID", "\"${localProperties["box.client.id"] ?: System.getenv("BOX_CLIENT_ID") ?: ""}\"")
+        buildConfigField("String", "BOX_CLIENT_SECRET", "\"${localProperties["box.client.secret"] ?: System.getenv("BOX_CLIENT_SECRET") ?: ""}\"")
         buildConfigField("String", "BOX_REDIRECT_URI", "\"com.example.visualmoneytracker://oauth2callback\"")
     }
 

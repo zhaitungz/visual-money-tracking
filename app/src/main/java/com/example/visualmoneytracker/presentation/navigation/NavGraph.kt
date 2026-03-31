@@ -43,7 +43,11 @@ fun NavGraph(
     NavHost(navController = navController, startDestination = Screen.Gallery.route) {
         composable(Screen.Gallery.route) {
             val viewModel: GalleryViewModel = hiltViewModel()
-            GalleryScreen(viewModel = viewModel, onFabClick = onFabClick)
+            GalleryScreen(
+                viewModel = viewModel,
+                onFabClick = onFabClick,
+                onNavigateToWallets = { navController.navigate(Screen.WalletManagement.route) }
+            )
         }
 
         composable(Screen.Analytics.route) {

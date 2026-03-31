@@ -186,8 +186,8 @@ Triển khai ứng dụng Android theo Clean Architecture (Presentation → Doma
     - Dùng `Arb.list(arbBackupFile, 0..20)` và `Arb.int(1..10)` cho keepCount, apply policy, verify: số file còn lại ≤ keepCount; các file còn lại là N file có timestamp lớn nhất; nếu tổng < N thì không xóa gì
     - Tag: `// Feature: visual-money-tracker, Property 10: Retention policy keeps exactly the N most recent backups`
 
-- [ ] 7. Xây dựng WorkManager Reminder
-  - [ ] 7.1 Implement ReminderWorker và scheduler
+- [-] 7. Xây dựng WorkManager Reminder
+  - [x] 7.1 Implement ReminderWorker và scheduler
     - Tạo `ReminderWorker : CoroutineWorker` post local notification
     - Tạo `ReminderSettings` data class và `ReminderFrequency` enum
     - Implement `ScheduleReminderUseCase`: build `PeriodicWorkRequest` theo frequency (DAILY→24h, WEEKLY→7 days, MONTHLY→30 days)

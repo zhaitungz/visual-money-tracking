@@ -1,6 +1,7 @@
 package com.example.visualmoneytracker
 
 import android.app.Application
+import com.example.visualmoneytracker.data.worker.NotificationHelper
 import com.example.visualmoneytracker.domain.repository.CategoryRepository
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
@@ -19,6 +20,7 @@ class VisualMoneyTrackerApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        NotificationHelper.createNotificationChannel(this)
         appScope.launch {
             categoryRepository.seedPresets()
         }

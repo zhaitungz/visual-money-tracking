@@ -1,7 +1,9 @@
 package com.example.visualmoneytracker.presentation.settings.wallet
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,6 +21,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
@@ -63,28 +66,51 @@ fun WalletManagementScreen(
             }
         }
     ) { padding ->
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-        ) {
-            items(state.wallets) { walletWithBalance ->
-                ListItem(
-                    headlineContent = { Text(walletWithBalance.wallet.name) },
-                    supportingContent = {
-                        Text("Số dư: ${formatAmount(walletWithBalance.currentBalance)}")
-                    },
-                    trailingContent = {
-                        Row {
-                            IconButton(onClick = { editTarget = walletWithBalance }) {
-                                Icon(Icons.Default.Edit, contentDescription = "Sửa")
-                            }
-                            IconButton(onClick = { deleteTarget = walletWithBalance }) {
-                                Icon(Icons.Default.Delete, contentDescription = "Xóa")
+        if (state.wallets.isEmpty()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        "Chưa có ví nào",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Text(
+                        "Nhấn + để tạo ví đầu tiên",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+        } else {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding),
+                contentPadding = PaddingValues(bottom = 80.dp)
+            ) {
+                items(state.wallets) { walletWithBalance ->
+                    ListItem(
+                        headlineContent = { Text(walletWithBalance.wallet.name) },
+                        supportingContent = {
+                            Text("Số dư: ${formatAmount(walletWithBalance.currentBalance)}")
+                        },
+                        trailingContent = {
+                            Row {
+                                IconButton(onClick = { editTarget = walletWithBalance }) {
+                                    Icon(Icons.Default.Edit, contentDescription = "Sửa")
+                                }
+                                IconButton(onClick = { deleteTarget = walletWithBalance }) {
+                                    Icon(Icons.Default.Delete, contentDescription = "Xóa")
+                                }
                             }
                         }
-                    }
-                )
+                    )
+                }
             }
         }
     }

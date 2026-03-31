@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -26,6 +27,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
+import androidx.compose.material3.Button
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -53,9 +55,37 @@ import java.util.Locale
 @Composable
 fun GalleryScreen(
     viewModel: GalleryViewModel,
-    onFabClick: () -> Unit
+    onFabClick: () -> Unit,
+    onNavigateToWallets: () -> Unit = {}
 ) {
     val state by viewModel.uiState.collectAsState()
+
+    // No wallets yet — show onboarding
+    if (state.wallets.isEmpty() && !state.isLoading) {
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                modifier = Modifier.padding(32.dp)
+            ) {
+                Text(
+                    "Chào mừng!",
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    "Tạo ví đầu tiên để bắt đầu theo dõi chi tiêu",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                )
+                Button(onClick = onNavigateToWallets) {
+                    Text("Tạo ví ngay")
+                }
+            }
+        }
+        return
+    }
 
     Box(modifier = Modifier.fillMaxSize()) {
         LazyVerticalGrid(

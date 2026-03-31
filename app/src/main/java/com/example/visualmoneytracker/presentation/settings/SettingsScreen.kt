@@ -35,6 +35,7 @@ fun SettingsScreen(
     onNavigateToWallets: () -> Unit
 ) {
     val syncViewModel: SyncViewModel = hiltViewModel()
+    val reminderViewModel: ReminderViewModel = hiltViewModel()
     val syncState by syncViewModel.uiState.collectAsState()
     val context = LocalContext.current
     var reminderEnabled by remember { mutableStateOf(false) }
@@ -70,7 +71,13 @@ fun SettingsScreen(
                     supportingContent = { Text("Bật/tắt nhắc nhở định kỳ") },
                     leadingContent = { Icon(Icons.Default.Notifications, contentDescription = null) },
                     trailingContent = {
-                        Switch(checked = reminderEnabled, onCheckedChange = { reminderEnabled = it })
+                        Switch(
+                            checked = reminderEnabled,
+                            onCheckedChange = { enabled ->
+                                reminderEnabled = enabled
+                                reminderViewModel.setReminder(enabled)
+                            }
+                        )
                     }
                 )
             }

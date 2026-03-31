@@ -29,6 +29,9 @@ jobs:
 
       - name: Build Debug APK
         run: gradle assembleDebug --no-daemon 2>&1
+        env:
+          BOX_CLIENT_ID: ${{ secrets.BOX_CLIENT_ID }}
+          BOX_CLIENT_SECRET: ${{ secrets.BOX_CLIENT_SECRET }}
 
       - name: Find APK
         run: find . -name "*.apk" -type f
