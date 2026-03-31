@@ -54,7 +54,10 @@ fun CategoryManagementScreen(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { showAddDialog = true }) {
+            FloatingActionButton(
+                onClick = { showAddDialog = true },
+                modifier = Modifier.padding(bottom = 64.dp)
+            ) {
                 Icon(Icons.Default.Add, contentDescription = "Thêm danh mục")
             }
         }
