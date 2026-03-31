@@ -46,7 +46,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.visualmoneytracker.domain.model.TransactionType
-import java.io.File
+import java.text.NumberFormat
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -73,7 +74,7 @@ fun AmountEntryScreen(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(16.dp),
+            .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 96.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         // Image preview
@@ -92,8 +93,13 @@ fun AmountEntryScreen(
         }
 
         // Amount display
+        val displayAmount = if (state.amount.isEmpty()) "0"
+        else {
+            val num = state.amount.toLongOrNull() ?: 0L
+            NumberFormat.getNumberInstance(Locale("vi", "VN")).format(num)
+        }
         Text(
-            text = if (state.amount.isEmpty()) "0" else state.amount,
+            text = displayAmount,
             style = MaterialTheme.typography.headlineLarge,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.fillMaxWidth(),
